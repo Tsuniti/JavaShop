@@ -33,11 +33,16 @@ services:
       - POSTGRES_PASSWORD=root
     ports:
       - '5432:5432'
-    volumes:
-      - eshop:/var/lib/postgresql/data
+#    volumes:
+#      - eshop:/var/lib/postgresql/data
 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - '8888:8080'
 
-
-volumes:
-  eshop:
+#
+#volumes:
+#  eshop:
 
