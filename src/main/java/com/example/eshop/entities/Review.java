@@ -24,10 +24,10 @@ public class Review {
 	private Integer rating;
 	private String text;
 
-	private Integer userId;
+	//private Integer userId;
 	//private User User;
 
-	public int ProductId;
+	//public int ProductId;
     //@JsonIgnore
 	//public Product Product;
 

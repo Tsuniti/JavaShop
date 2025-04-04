@@ -26,13 +26,14 @@ public class Product {
 //	@Size(min = 3, max = 32, message = "Category name must be between 3 and 32 characters long.")
 	private String name;
 
-	private Image image;
+//	private Image image;
+	private Integer imageId;
 
 	private String description;
 
-	private Integer categoryId;
+	//private Integer categoryId;
 
-	private Category category;
+//	private Category category;
 
 //	@DecimalMin(value = "0.0", message = "The price cannot be negative")
 //	@DecimalMax(value = "999999999.0", message = "The price is too large")

@@ -25,8 +25,6 @@ public class Image {
 
 	private String url;
 
-	private Integer productId;
-
 //	private Product Product;
 
 	private OffsetDateTime createdAt;

@@ -26,8 +26,8 @@ public class CartItem {
 
 	private Integer Quantity;
 
-	private Integer ProductId;
-	private Integer CartId;
+	//private Integer ProductId;
+	//private Integer CartId;
 
 
 	private OffsetDateTime createdAt;

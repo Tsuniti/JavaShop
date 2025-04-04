@@ -33,7 +33,7 @@ public class UserEntity {
 
 	private UserRole role;
 
-	private int cartId;
+	//private int cartId;
 	//private Cart cart;
 
 	//@JsonIgnore
