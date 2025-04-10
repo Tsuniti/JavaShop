@@ -1,6 +1,9 @@
 package com.example.eshop.entities;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.OffsetDateTime;
@@ -23,10 +26,21 @@ public class Image {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@NotNull(message = "CreatedAt cannot be null.")
+	@NotEmpty(message = "CreatedAt cannot be empty.")
 	private String url;
 
-//	private Product Product;
 
+	@NotNull(message = "CreatedAt cannot be null.")
 	private OffsetDateTime createdAt;
+	@Nullable
 	private OffsetDateTime updatedAt;
+
+	//Relations
+	//OneToOne
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	@OneToOne(mappedBy = "image", fetch = FetchType.LAZY)
+	private Product Product;
+
 }

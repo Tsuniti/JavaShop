@@ -1,10 +1,13 @@
 package com.example.eshop.entities;
 
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 
 @Getter
@@ -23,14 +26,28 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	//private Integer userId;
 
+	@NotNull(message = "CreatedAt cannot be null.")
 	private OffsetDateTime createdAt;
+	@Nullable
 	private OffsetDateTime updatedAt;
 
-//
-//	private UserEntity user;
 
-//
-//	private IEnumerable<CartItem> CartItems;
+	//
+	//Relations
+	//OneToOne
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	@OneToOne(mappedBy = "cart", fetch = FetchType.LAZY)
+	private UserEntity userEntity;
+
+
+
+	//OneToMany
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	@OneToMany(mappedBy = "cart",fetch = FetchType.LAZY)
+	private List<CartItem> cartItems;
+
+
 }

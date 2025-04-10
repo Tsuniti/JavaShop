@@ -1,14 +1,13 @@
 package com.example.eshop.entities;
 
+
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.OffsetDateTime;
 import java.util.List;
-
 
 @Getter
 @Setter
@@ -19,16 +18,11 @@ import java.util.List;
 @AllArgsConstructor
 //
 @Entity
-@Table(name = "categories")
-public class Category {
-
+@Table(name = "orders")
+public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-
-	@NotNull(message = "name cannot be null.")
-	@Size(min = 3, max = 32, message = "Category name must be between 3 and 32 characters long.")
-	private String name;
+	private Long id;
 
 
 	@NotNull(message = "CreatedAt cannot be null.")
@@ -38,9 +32,11 @@ public class Category {
 
 
 	//Relations
+
 	//OneToMany
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	@OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
-	private List<Product> products;
+	@OneToMany(mappedBy = "order",fetch = FetchType.LAZY)
+	private List<OrderItem> orderItems;
+
 }
