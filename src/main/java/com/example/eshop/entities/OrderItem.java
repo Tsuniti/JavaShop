@@ -23,7 +23,7 @@ import java.time.OffsetDateTime;
 public class OrderItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 
 	@NotEmpty(message = "Quantity cannot be null.")

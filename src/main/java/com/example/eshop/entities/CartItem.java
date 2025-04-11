@@ -28,7 +28,7 @@ public class CartItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 	@NotEmpty(message = "Quantity cannot be null.")
 	@Min(value = 0, message = "Quantity must be at least 1")

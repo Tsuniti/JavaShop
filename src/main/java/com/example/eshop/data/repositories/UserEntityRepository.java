@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface UserEntityRepository extends JpaRepository<UserEntity, Integer> {
 
-  }
+	boolean existsByUsernameIgnoreCase(String username);
+
+	UserEntity findByUsernameIgnoreCaseAndPasswordHash(String username, String passwordHash);
+}
