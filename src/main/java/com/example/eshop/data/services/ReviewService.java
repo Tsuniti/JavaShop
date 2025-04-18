@@ -9,5 +9,5 @@ public interface ReviewService {
 	List<Review> findAllByProductId(Integer productId);
 	Review save(Review review);
 	//int update(Review review);
-	void delete(Integer id);
+	void delete(int id);
 }

@@ -17,12 +17,12 @@ public class CartServiceDb implements CartService {
 	}
 
 	@Override
-	public Cart findById(Integer id) {
+	public Cart findById(int id) {
 		return cartRepository.findById(id).orElse(null);
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(int id) {
 		cartRepository.deleteById(id);
 	}
 }

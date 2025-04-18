@@ -1,13 +1,12 @@
 package com.example.eshop.entities;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+
+@Builder
 
 @Getter
 @Setter
@@ -33,6 +32,17 @@ public class UserEntity {
 	{
 		status = Status.CREATED;
 		role = Role.USER;
+	}
+
+	@PrePersist
+	public void prePersist() {
+		if (status == null)
+			status = Status.CREATED;
+		if (role == null)
+			role = Role.USER;
+
+		if(createdAt == null)
+			createdAt=OffsetDateTime.now();
 	}
 
 	@Id
@@ -61,10 +71,10 @@ public class UserEntity {
 	private Role role;
 
 //	@NotNull(message = "CreatedAt cannot be null.")
-@Column(nullable = false)
+@Column(nullable = false, updatable = false)
 
 	private OffsetDateTime createdAt;
-	@Nullable
+@Column(nullable = true)
 	private OffsetDateTime updatedAt;
 
 
@@ -72,7 +82,7 @@ public class UserEntity {
 	//OneToOne
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Cart cart;
 
 	//OneToMany

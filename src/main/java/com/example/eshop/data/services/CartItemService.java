@@ -5,5 +5,5 @@ import com.example.eshop.entities.CartItem;
 public interface CartItemService {
 	CartItem save(CartItem cartItem);
 	//int update(CartItem cartItem);
-	void delete(Long id);
+	void delete(long id);
 }

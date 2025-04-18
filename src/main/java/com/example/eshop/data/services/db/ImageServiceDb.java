@@ -1,10 +1,8 @@
 package com.example.eshop.data.services.db;
 
 import com.example.eshop.data.repositories.ImageRepository;
-import com.example.eshop.data.repositories.OrderItemRepository;
 import com.example.eshop.data.services.ImageService;
 import com.example.eshop.entities.Image;
-import com.example.eshop.entities.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +17,7 @@ public class ImageServiceDb implements ImageService {
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(int id) {
 		imageRepository.deleteById(id);
 	}
 }

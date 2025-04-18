@@ -17,7 +17,7 @@ public class OrderItemServiceDb implements OrderItemService {
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(long id) {
 		orderItemRepository.deleteById(id);
 	}
 }

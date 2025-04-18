@@ -10,7 +10,7 @@ import lombok.*;
 
 import java.time.OffsetDateTime;
 
-
+@Builder
 
 @Getter
 @Setter
@@ -25,6 +25,12 @@ import java.time.OffsetDateTime;
 uniqueConstraints = @UniqueConstraint(columnNames = {"product_id", "cart_id"}))
 public class CartItem {
 
+	@PrePersist
+	public void prePersist() {
+
+		if(createdAt == null)
+			createdAt=OffsetDateTime.now();
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +41,8 @@ public class CartItem {
 	private int quantity;
 
 
-	@NotNull(message = "CreatedAt cannot be null.")
+	//@NotNull(message = "CreatedAt cannot be null.")
+	@Column(nullable = false, updatable = false)
 	private OffsetDateTime createdAt;
 	@Nullable
 	private OffsetDateTime updatedAt;

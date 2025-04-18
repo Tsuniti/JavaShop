@@ -5,6 +5,6 @@ import com.example.eshop.entities.Order;
 public interface OrderService {
 	Order save(Order order);
 	//int update(Order order);
-	Order findById(Long id);
-	void delete(Long id);
+	Order findById(long id);
+	void delete(long id);
 }

@@ -18,7 +18,7 @@ public class CartItemServiceDb implements CartItemService {
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(long id) {
 		cartItemRepository.deleteById(id);
 	}
 }

@@ -29,7 +29,7 @@ public class ReviewServiceDb implements ReviewService {
 
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(int id) {
 		reviewRepository.deleteById(id);
 		//productRepository.recountRating()
 

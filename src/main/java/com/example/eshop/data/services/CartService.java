@@ -6,6 +6,6 @@ public interface CartService {
 
 	Cart save(Cart cart);
 	//int update(Cart cart);
-	Cart findById(Integer id);
-	void delete(Integer id);
+	Cart findById(int id);
+	void delete(int id);
 }

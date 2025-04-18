@@ -6,6 +6,8 @@ import com.example.eshop.entities.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserEntityServiceDb implements UserEntityService {
 	@Autowired
@@ -24,5 +26,15 @@ public class UserEntityServiceDb implements UserEntityService {
 	@Override
 	public UserEntity findByCredentials(String username, String passwordHash) {
 		return userEntityRepository.findByUsernameIgnoreCaseAndPasswordHash(username, passwordHash);
+	}
+
+	@Override
+	public List<UserEntity> findAll() {
+		return userEntityRepository.findAll();
+	}
+
+	@Override
+	public UserEntity findById(Integer id) {
+		return userEntityRepository.findById(id).orElse(null);
 	}
 }

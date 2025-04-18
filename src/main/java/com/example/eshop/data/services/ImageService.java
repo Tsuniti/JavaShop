@@ -4,5 +4,5 @@ import com.example.eshop.entities.Image;
 
 public interface ImageService {
 	Image save(Image image);
-	void delete(Integer id);
+	void delete(int id);
 }

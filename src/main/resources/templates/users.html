@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Users</title>
+	</head>
+	<body>
+		<div>
+			<form th:action="@{/users-form}" method="post">
+				<input type="text" name="username" placeholder="Username" />
+				<input type="password" name="passwordHash" placeholder="Password" />
+				<select name="status" id="status">
+					<option
+						th:each="statusConst : ${T(com.example.eshop.entities.UserEntity.Status).values()}"
+						th:value="${statusConst.name()}"
+						th:utext="${statusConst.name()}"
+					></option>
+				</select>
+				<select name="role" id="role">
+					<option
+						th:each="roleConst : ${T(com.example.eshop.entities.UserEntity.Role).values()}"
+						th:value="${roleConst.name()}"
+						th:utext="${roleConst.name()}"
+					></option>
+				</select>
+				<input type="submit" value="Submit" />
+			</form>
+			<table>
+				<tr>
+					<th>Username</th>
+					<th>Status</th>
+					<th>Role</th>
+				</tr>
+				<tr th:each="user:${userList}">
+					<form th:action="@{/userEntity-update}" method="post">
+						<input type="hidden" name="id" id="id" th:value="${user.id}" />
+						<td><input name="username" th:value="${user.username}" /></td>
+						<td>
+							<select name="status" id="status">
+								<option
+									th:each="statusConst : ${T(com.example.eshop.entities.UserEntity.Status).values()}"
+									th:value="${statusConst.name()}"
+									th:utext="${statusConst.name()}"
+									th:selected="${statusConst==user.status}"
+								></option>
+							</select>
+						</td>
+						<td>
+							<select name="role" id="role">
+								<option
+									th:each="roleConst : ${T(com.example.eshop.entities.UserEntity.Role).values()}"
+									th:value="${roleConst.name()}"
+									th:utext="${roleConst.name()}"
+									th:selected="${roleConst==user.role}"
+								>
+									>
+								</option>
+							</select>
+						</td>
+						<td><button type="submit">Save</button></td>
+					</form>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

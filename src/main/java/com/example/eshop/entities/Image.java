@@ -8,6 +8,7 @@ import lombok.*;
 
 import java.time.OffsetDateTime;
 
+@Builder
 
 @Getter
 @Setter
@@ -21,6 +22,12 @@ import java.time.OffsetDateTime;
 @Table(name = "images")
 public class Image {
 
+	@PrePersist
+	public void prePersist() {
+
+		if(createdAt == null)
+			createdAt=OffsetDateTime.now();
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +38,8 @@ public class Image {
 	private String url;
 
 
-	@NotNull(message = "CreatedAt cannot be null.")
+	//@NotNull(message = "CreatedAt cannot be null.")
+	@Column(nullable = false, updatable = false)
 	private OffsetDateTime createdAt;
 	@Nullable
 	private OffsetDateTime updatedAt;

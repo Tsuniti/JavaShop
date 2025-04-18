@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+@Builder
 
 @Getter
 @Setter
@@ -21,6 +22,14 @@ import java.util.List;
 @Entity
 @Table(name = "products")
 public class Product {
+
+
+	@PrePersist
+	public void prePersist() {
+
+		if(createdAt == null)
+			createdAt=OffsetDateTime.now();
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,20 +46,20 @@ public class Product {
 
 	@NotNull(message = "Price cannot be null.")
 	@DecimalMin(value = "0.0", message = "The price cannot be negative")
-	@DecimalMax(value = "999_999_999.0", message = "The price is too large")
-	@Digits(integer = 1, fraction = 2, message = "The price must have at most 2 decimal places")
+	@DecimalMax(value = "999999999.0", message = "The price is too large")
+	@Digits(integer = 9, fraction = 2, message = "The price must have at most 2 decimal places")
 	private BigDecimal price;
 
-	@NotNull(message = "Rating cannot be null.")
-	@Min(value = 1, message = "Rating must be at least 1.00")
+	@Min(value = 0, message = "Rating must be at least 0.00")
 	@Max(value = 5, message = "Rating must be at most 5.00")
 	private double rating;
 
 	@NotNull(message = "Quantity cannot be null.")
-	@Min(value = 0, message = "Quantity must be at least 1")
+	@Min(value = 0, message = "Quantity must be at least 0")
 	private Integer quantity;
 
-	@NotNull(message = "CreatedAt cannot be null.")
+	//@NotNull(message = "CreatedAt cannot be null.")
+	@Column(nullable = false, updatable = false)
 	private OffsetDateTime createdAt;
 	@Nullable
 	private OffsetDateTime updatedAt;

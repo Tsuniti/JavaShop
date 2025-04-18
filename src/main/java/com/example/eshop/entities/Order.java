@@ -9,6 +9,8 @@ import lombok.*;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+@Builder
+
 @Getter
 @Setter
 @ToString
@@ -20,12 +22,22 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 public class Order {
+
+
+	@PrePersist
+	public void prePersist() {
+
+		if(createdAt == null)
+			createdAt=OffsetDateTime.now();
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 
-	@NotNull(message = "CreatedAt cannot be null.")
+	//@NotNull(message = "CreatedAt cannot be null.")
+	@Column(nullable = false, updatable = false)
 	private OffsetDateTime createdAt;
 	@Nullable
 	private OffsetDateTime updatedAt;

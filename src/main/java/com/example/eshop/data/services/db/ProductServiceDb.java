@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class ProductServiceDb implements ProductService {
@@ -39,7 +40,12 @@ public class ProductServiceDb implements ProductService {
 	}
 
 	@Override
-	public Product findById(Integer id) {
+	public List<Product> findAll() {
+		return productRepository.findAll();
+	}
+
+	@Override
+	public Product findById(int id) {
 		return productRepository.findById(id).orElse(null);
 	}
 
@@ -49,7 +55,7 @@ public class ProductServiceDb implements ProductService {
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(int id) {
 		productRepository.deleteById(id);
 	}
 }

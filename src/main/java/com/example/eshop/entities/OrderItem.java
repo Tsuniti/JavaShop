@@ -10,6 +10,8 @@ import lombok.*;
 import java.time.OffsetDateTime;
 
 
+@Builder
+
 @Getter
 @Setter
 @ToString
@@ -21,6 +23,15 @@ import java.time.OffsetDateTime;
 @Entity
 @Table(name = "orderItems")
 public class OrderItem {
+
+
+	@PrePersist
+	public void prePersist() {
+
+		if(createdAt == null)
+			createdAt=OffsetDateTime.now();
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -32,7 +43,8 @@ public class OrderItem {
 
 
 
-	@NotNull(message = "CreatedAt cannot be null.")
+	//@NotNull(message = "CreatedAt cannot be null.")
+	@Column(nullable = false, updatable = false)
 	private OffsetDateTime createdAt;
 	@Nullable
 	private OffsetDateTime updatedAt;

@@ -17,12 +17,12 @@ public class OrderServiceDb implements OrderService {
 	}
 
 	@Override
-	public Order findById(Long id) {
+	public Order findById(long id) {
 		return orderRepository.findById(id).orElse(null);
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(long id) {
 		orderRepository.deleteById(id);
 	}
 }

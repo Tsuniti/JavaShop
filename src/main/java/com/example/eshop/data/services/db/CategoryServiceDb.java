@@ -23,12 +23,12 @@ public class CategoryServiceDb implements CategoryService {
 	}
 
 	@Override
-	public Category findById(Integer id) {
+	public Category findById(int id) {
 		return categoryRepository.findById(id).orElse(null);
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(int id) {
 		categoryRepository.deleteById(id);
 	}
 }
