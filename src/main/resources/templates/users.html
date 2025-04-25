@@ -1,35 +1,87 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<meta charset="UTF-8" />
+		<th:block th:insert="~{fragments/settings.html :: settings-fragment}" />
 		<title>Users</title>
 	</head>
 	<body>
+		<th:block th:insert="~{fragments/header.html :: header-fragment}" />
 		<div>
-			<form th:action="@{/users-form}" method="post">
-				<input type="text" name="username" placeholder="Username" />
-				<input type="password" name="passwordHash" placeholder="Password" />
-				<select name="status" id="status">
-					<option
-						th:each="statusConst : ${T(com.example.eshop.entities.UserEntity.Status).values()}"
-						th:value="${statusConst.name()}"
-						th:utext="${statusConst.name()}"
-					></option>
-				</select>
-				<select name="role" id="role">
-					<option
-						th:each="roleConst : ${T(com.example.eshop.entities.UserEntity.Role).values()}"
-						th:value="${roleConst.name()}"
-						th:utext="${roleConst.name()}"
-					></option>
-				</select>
-				<input type="submit" value="Submit" />
-			</form>
+			<table>
+				<tr>
+					<th>Username</th>
+					<th>Password</th>
+					<th>Status</th>
+					<th>Role</th>
+					<th></th>
+				</tr>
+
+				<form th:action="@{/users-form}" method="post">
+					<td><input type="text" name="username" placeholder="Username" /></td>
+					<td>
+						<input type="password" name="passwordHash" placeholder="Password" />
+					</td>
+					<td>
+						<select name="status" id="status">
+							<option
+								th:each="statusConst : ${T(com.example.eshop.entities.UserEntity.Status).values()}"
+								th:value="${statusConst.name()}"
+								th:utext="${statusConst.name()}"
+							></option>
+						</select>
+					</td>
+					<td>
+						<select name="role" id="role">
+							<option
+								th:each="roleConst : ${T(com.example.eshop.entities.UserEntity.Role).values()}"
+								th:value="${roleConst.name()}"
+								th:utext="${roleConst.name()}"
+							></option>
+						</select>
+					</td>
+					<td>
+						<input type="submit" value="Add" />
+					</td>
+				</form>
+			</table>
 			<table>
 				<tr>
 					<th>Username</th>
 					<th>Status</th>
 					<th>Role</th>
+					<th>Created at</th>
+					<th>Updated at</th>
+					<th></th>
+				</tr>
+
+				<tr th:each="user:${userList}">
+					<form th:action="@{/user-update-redirect-form}" method="post">
+						<input type="hidden" name="userId" th:value="${user.id}" readonly />
+						<td><p th:text="${user.username}"></p></td>
+						<td><p th:text="${user.status.name}"></p></td>
+						<td><p th:text="${user.role.name}"></p></td>
+						<td>
+							<p
+								th:text="${#temporals.format(user.createdAt, 'dd.MM.yyyy HH:mm')}"
+							></p>
+						</td>
+						<td>
+							<p
+								th:text="${#temporals.format(user.updatedAt, 'dd.MM.yyyy HH:mm')}"
+							></p>
+						</td>
+						<td><input type="submit" value="Update redirect" /></td>
+					</form>
+				</tr>
+			</table>
+			<!-- <table>
+				<tr>
+					<th>Username</th>
+					<th>Status</th>
+					<th>Role</th>
+					<th>Created at</th>
+					<th>Updated at</th>
+					<th></th>
 				</tr>
 				<tr th:each="user:${userList}">
 					<form th:action="@{/userEntity-update}" method="post">
@@ -57,10 +109,20 @@
 								</option>
 							</select>
 						</td>
+						<td>
+							<p
+								th:text="${#temporals.format(user.createdAt, 'dd.MM.yyyy HH:mm')}"
+							></p>
+						</td>
+						<td>
+							<p
+								th:text="${#temporals.format(user.updatedAt, 'dd.MM.yyyy HH:mm')}"
+							></p>
+						</td>
 						<td><button type="submit">Save</button></td>
 					</form>
 				</tr>
-			</table>
+			</table> -->
 		</div>
 	</body>
 </html>

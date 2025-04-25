@@ -7,8 +7,9 @@ import java.util.Optional;
 
 public interface UserEntityService {
 	UserEntity save(UserEntity userEntity);
+	UserEntity update(UserEntity userEntity);
 	Boolean usernameExists(String username);
 	UserEntity findByCredentials(String username, String passwordHash);
 	List<UserEntity> findAll();
-	UserEntity findById(Integer id);
+	Optional<UserEntity> findById(Integer id);
 }

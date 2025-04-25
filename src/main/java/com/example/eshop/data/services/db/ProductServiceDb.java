@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceDb implements ProductService {
@@ -45,14 +46,15 @@ public class ProductServiceDb implements ProductService {
 	}
 
 	@Override
-	public Product findById(int id) {
-		return productRepository.findById(id).orElse(null);
+	public Optional<Product> findById(int id) {
+		return productRepository.findById(id);
 	}
 
 	@Override
 	public Product save(Product product) {
 		return productRepository.save(product);
 	}
+
 
 	@Override
 	public void delete(int id) {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -52,21 +53,35 @@ public class UsersController {
 		userEntityService.save(userEntity);
 		return "redirect:/users";
 	}
-	@PostMapping("/userEntity-update" )
-	public String usersUpdateForm(@ModelAttribute UserEntity userEntity) {
-		System.err.println(userEntity);
+//	@PostMapping("/userEntity-update" )
+//	public String usersUpdateForm(@ModelAttribute UserEntity userEntity) {
+//		System.err.println(userEntity);
+//
+//		if (userEntity.getPasswordHash() == null || userEntity.getPasswordHash().isBlank()) {
+//			// Сохраняем старый пароль, если новый не указан
+//			String oldPasswordHash = userEntityService.findById(userEntity.getId())
+//					.orElseThrow()
+//					.getPasswordHash();
+//			userEntity.setPasswordHash(oldPasswordHash);
+//		}
+//
+//
+//		userEntity.setUpdatedAt(OffsetDateTime.now());
+//		userEntityService.update(userEntity);
+//		return "redirect:/users";
+//	}
 
-		if (userEntity.getPasswordHash() == null || userEntity.getPasswordHash().isBlank()) {
-			// Сохраняем старый пароль, если новый не указан
-			String oldPasswordHash = userEntityService.findById(userEntity.getId())
-					.getPasswordHash();
-			userEntity.setPasswordHash(oldPasswordHash);
-		}
+/*	@PostMapping("/user-update-redirect-form")
+	public ModelAndView userUpdateRedirect(@RequestParam("userId") Integer userId) {
+		return new ModelAndView("redirect:/user-update",
+				new ModelMap("userId", userId));
+	}*/
 
-
-		userEntity.setUpdatedAt(OffsetDateTime.now());
-		userEntityService.save(userEntity);
-		return "redirect:/users";
+	@PostMapping("/user-update-redirect-form")
+	public String userUpdateRedirect(
+			@RequestParam("userId") Integer userId,
+			RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("userId", userId);
+		return "redirect:/user-update";
 	}
-
 }

@@ -1,5 +1,7 @@
 package com.example.eshop.entities;
 
+import com.example.eshop.data.services.json.CategoryDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -76,7 +78,8 @@ public class Product {
 
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	@OneToOne(fetch = FetchType.LAZY)
+	@JsonDeserialize(using = CategoryDeserializer.class)
+	@OneToOne(fetch = FetchType.EAGER)
 	private Category category;
 
 	//OneToMany

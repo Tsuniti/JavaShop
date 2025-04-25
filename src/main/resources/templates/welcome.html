@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<th:block th:insert="~{fragments/settings.html :: settings-fragment}" />
+		<title>Users</title>
+	</head>
+	<body>
+		<div class="welcome-wrapper">
+			<h2>Welcome!</h2>
+			<div class="welcome-buttons">
+				<a class="submit-btn primary" th:href="@{/login}">Login</a>
+				<a class="submit-btn secondary" th:href="@{/register}">Register</a>
+			</div>
+		</div>
+	</body>
+</html>

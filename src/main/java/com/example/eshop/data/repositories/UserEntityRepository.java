@@ -8,10 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserEntityRepository extends JpaRepository<UserEntity, Integer> {
 
 	boolean existsByUsernameIgnoreCase(String username);
 
 	UserEntity findByUsernameIgnoreCaseAndPasswordHash(String username, String passwordHash);
+
+	Optional<UserEntity> findByUsernameIgnoreCase(String username);
 }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<th:block th:insert="~{fragments/settings.html :: settings-fragment}" />
+		<title>User update</title>
+	</head>
+	<body>
+		<th:block th:insert="~{fragments/header.html :: header-fragment}" />
+		<div id="form-container">
+			<table>
+				<tr>
+					<th>Username</th>
+					<th>Status</th>
+					<th>Role</th>
+					<th></th>
+				</tr>
+				<form th:action="@{/rest/user-update-form}" method="post">
+					<input type="hidden" name="id" th:value="${user.id}" />
+					<td>
+						<input
+							type="text"
+							name="username"
+							placeholder="Username"
+							th:value="${user.username}"
+						/>
+					</td>
+					<td>
+						<select name="status" id="status">
+							<option
+								th:each="statusConst : ${T(com.example.eshop.entities.UserEntity.Status).values()}"
+								th:value="${statusConst.name()}"
+								th:utext="${statusConst.name()}"
+								th:selected="${statusConst==user.status}"
+							></option>
+						</select>
+					</td>
+					<td>
+						<select name="role" id="role">
+							<option
+								th:each="roleConst : ${T(com.example.eshop.entities.UserEntity.Role).values()}"
+								th:value="${roleConst.name()}"
+								th:utext="${roleConst.name()}"
+								th:selected="${roleConst==user.role}"
+							></option>
+						</select>
+					</td>
+					<td>
+						<input type="submit" value="Update redirect" />
+					</td>
+				</form>
+			</table>
+		</div>
+		<script type="text/javascript" src="js/user-update/user-update.js"></script>
+	</body>
+</html>

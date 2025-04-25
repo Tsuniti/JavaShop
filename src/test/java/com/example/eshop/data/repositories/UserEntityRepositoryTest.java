@@ -2,12 +2,10 @@ package com.example.eshop.data.repositories;
 
 import com.example.eshop.beans.EntitiesGenerator;
 import com.example.eshop.entities.UserEntity;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -63,6 +61,7 @@ class UserEntityRepositoryTest {
 	@Test
 	void findAll(){
 		List<UserEntity> findList = userEntityRepository.findAll();
+		System.out.println(findList);
 		assertNotEquals(0, findList.size());
 		assertEquals(2, findList.size());
 		assertIterableEquals(userEntityList, findList);
