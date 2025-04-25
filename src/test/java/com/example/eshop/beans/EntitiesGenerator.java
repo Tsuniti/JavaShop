@@ -1,8 +1,6 @@
 package com.example.eshop.beans;
 
-import com.example.eshop.entities.Product;
-import com.example.eshop.entities.Review;
-import com.example.eshop.entities.UserEntity;
+import com.example.eshop.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -19,10 +17,10 @@ import java.util.List;
 @TestConfiguration
 public class EntitiesGenerator {
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+//	@Bean
+//	public PasswordEncoder passwordEncoder() {
+//		return new BCryptPasswordEncoder();
+//	}
 
 	@Lazy
 	@Autowired
@@ -139,6 +137,154 @@ public class EntitiesGenerator {
 						.quantity(100)
 						.createdAt(OffsetDateTime.now())
 						.build()
+		));
+	}
+
+	@Scope("prototype")
+	@Bean
+	public OrderItem orderItem() {
+		return new OrderItem(
+				null,
+				5,
+				OffsetDateTime.now(),
+				null,
+				null,
+				null
+		);
+	}
+
+	@Scope("prototype")
+	@Bean
+	public List<OrderItem> orderItemList() {
+		return new ArrayList<>(List.of(
+				OrderItem.builder()
+						.quantity(10)
+						.createdAt(OffsetDateTime.now())
+						.build()
+				,
+				OrderItem.builder()
+						.quantity(20)
+						.createdAt(OffsetDateTime.now())
+						.build()
+		));
+	}
+
+
+	@Scope("prototype")
+	@Bean
+	public Order order() {
+		return new Order();
+	}
+
+	@Scope("prototype")
+	@Bean
+	public List<Order> orderList() {
+		return new ArrayList<>(List.of(
+				new Order()
+				,
+				new Order()
+		));
+	}
+
+	@Scope("prototype")
+	@Bean
+	public Image image() {
+		return new Image(
+				null,
+				"http://image.com",
+				OffsetDateTime.now(),
+				null,
+				null
+		);
+	}
+
+	@Scope("prototype")
+	@Bean
+	public List<Image> imageList() {
+		return new ArrayList<>(List.of(
+				Image.builder()
+						.url("http://image.com/test1")
+						.createdAt(OffsetDateTime.now())
+						.build()
+				,
+				Image.builder()
+						.url("http://image.com/test2")
+						.createdAt(OffsetDateTime.now())
+						.build()
+		));
+	}
+
+	@Scope("prototype")
+	@Bean
+	public Category category() {
+		return new Category(
+				null,
+				"category1",
+				OffsetDateTime.now(),
+				null,
+				null
+		);
+	}
+
+	@Scope("prototype")
+	@Bean
+	public List<Category> categoryList() {
+		return new ArrayList<>(List.of(
+				Category.builder()
+						.name("categoryList1")
+						.createdAt(OffsetDateTime.now())
+						.build()
+				,
+				Category.builder()
+						.name("categoryList2")
+						.createdAt(OffsetDateTime.now())
+						.build()
+		));
+	}
+
+
+	@Scope("prototype")
+	@Bean
+	public CartItem cartItem() {
+		return new CartItem(
+				null,
+				5,
+				OffsetDateTime.now(),
+				null,
+				null,
+				null
+		);
+	}
+
+	@Scope("prototype")
+	@Bean
+	public List<CartItem> cartItemList() {
+		return new ArrayList<>(List.of(
+				CartItem.builder()
+						.quantity(10)
+						.createdAt(OffsetDateTime.now())
+						.build()
+				,
+				CartItem.builder()
+						.quantity(20)
+						.createdAt(OffsetDateTime.now())
+						.build()
+		));
+	}
+
+	@Scope("prototype")
+	@Bean
+	public Cart cart() {
+		return new Cart();
+	}
+
+	@Scope("prototype")
+	@Bean
+	public List<Cart> cartList() {
+		return new ArrayList<>(List.of(
+				new Cart()
+				,
+				new Cart()
 		));
 	}
 
