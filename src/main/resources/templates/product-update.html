@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<th:block th:insert="~{fragments/settings.html :: settings-fragment}" />
+		<title>Product update</title>
+	</head>
+	<body>
+		<th:block th:insert="~{fragments/header.html :: header-fragment}" />
+		<div id="form-container">
+			<table>
+				<tr>
+					<th>Product name</th>
+					<th>Description</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th>Category</th>
+					<th></th>
+				</tr>
+
+				<form th:action="@{/products-form}" method="post">
+					<input type="hidden" name="id" th:value="${product.id}" />
+					<td>
+						<input
+							type="text"
+							name="name"
+							placeholder="Product name"
+							th:value="${product.name}"
+							required
+						/>
+					</td>
+					<td>
+						<input
+							type="text"
+							name="description"
+							placeholder="Description"
+							th:value="${product.description}"
+							required
+						/>
+					</td>
+					<td>
+						<input
+							type="number"
+							name="price"
+							step="0.01"
+							min="0"
+							placeholder="Price"
+							th:value="${product.price}"
+							required
+						/>
+					</td>
+					<td>
+						<input
+							type="number"
+							min="0"
+							name="quantity"
+							placeholder="Quantity"
+							th:value="${product.quantity}"
+							required
+						/>
+					</td>
+					<td>
+						<select name="category" id="category">
+							<option
+								th:each=" category : ${categories}"
+								th:value="${category.id}"
+								th:text="${category.name}"
+								th:selected="${category.id == product.category.id}"
+							></option>
+						</select>
+					</td>
+					<td>
+						<input type="submit" value="Update" />
+					</td>
+				</form>
+			</table>
+		</div>
+		<script
+			type="text/javascript"
+			src="js/product-update/product-update.js"
+		></script>
+	</body>
+</html>

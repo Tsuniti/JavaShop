@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<th:block th:insert="~{fragments/settings.html :: settings-fragment}" />
+		<title>Categories</title>
+	</head>
+	<body>
+		<div>
+			<th:block th:insert="~{fragments/header.html :: header-fragment}" />
+			<form th:action="@{/categories-form}" method="post">
+				<input type="text" name="name" placeholder="Category name" required />
+				<input type="submit" value="Add" />
+			</form>
+			<table>
+				<tr>
+					<th>Category name</th>
+					<th>Created at</th>
+					<th>Updated at</th>
+				</tr>
+				<tr th:each="category:${categoryList}">
+					<form th:action="@{/category-update}" method="post">
+						<input type="hidden" name="id" id="id" th:value="${category.id}" />
+						<td><input name="name" th:value="${category.name}" /></td>
+						<td>
+							<p
+								th:text="${#temporals.format(category.createdAt, 'dd.MM.yyyy HH:mm')}"
+							></p>
+						</td>
+						<td>
+							<p
+								th:text="${#temporals.format(category.updatedAt, 'dd.MM.yyyy HH:mm')}"
+							></p>
+						</td>
+						<td><button type="submit">Save</button></td>
+					</form>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

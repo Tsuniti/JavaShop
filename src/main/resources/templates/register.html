@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<th:block th:insert="~{fragments/settings.html :: settings-fragment}" />
+		<title>Users</title>
+	</head>
+	<body>
+		<form class="register-form" th:action="@{/register-form}" method="post">
+			<h2>Please sign up</h2>
+
+			<p>
+				<input type="text" name="username" placeholder="Username" />
+			</p>
+			<p>
+				<input type="password" name="passwordHash" placeholder="Password" />
+			</p>
+			<p>
+				<select name="role" id="role">
+					<option
+						th:each="roleConst : ${T(com.example.eshop.entities.UserEntity.Role).values()}"
+						th:value="${roleConst.name()}"
+						th:utext="${roleConst.name()}"
+					></option>
+				</select>
+			</p>
+			<button class="submit-btn primary" type="submit">Sign up</button>
+		</form>
+	</body>
+</html>
