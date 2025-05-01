@@ -31,7 +31,6 @@ public class UserRegisterController {
 		Cart newCart = new Cart();
 		newCart.setUserEntity(userEntity);
 		userEntity.setCart(newCart);
-		userEntity.setStatus(UserEntity.Status.ACTIVE);
 		userEntityService.save(userEntity);
 
 		return "redirect:/products";

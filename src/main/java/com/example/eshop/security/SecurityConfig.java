@@ -61,7 +61,10 @@ public class SecurityConfig {
 								.requestMatchers("/", "/error", "/welcome", "/register", "/register-form", "/*.css").permitAll()
 								//Дозволені сторінки залежно від повноважень
 								//функції .has...()
-								.requestMatchers("/users", "/products", "/categories").hasAnyAuthority(
+								.requestMatchers("/users").hasAuthority(
+										UserEntity.Role.ADMIN.name()
+								)
+								.requestMatchers("/products", "/categories").hasAnyAuthority(
 										UserEntity.Role.ADMIN.name(),
 										UserEntity.Role.USER.name()
 								)

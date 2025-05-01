@@ -5,25 +5,55 @@
 		<title>Users</title>
 	</head>
 	<body>
-		<form class="register-form" th:action="@{/register-form}" method="post">
+		<form
+			class="register-form"
+			th:action="@{/register-form}"
+			method="post"
+			onsubmit="return validatePasswords()"
+		>
 			<h2>Please sign up</h2>
 
 			<p>
 				<input type="text" name="username" placeholder="Username" />
 			</p>
 			<p>
-				<input type="password" name="passwordHash" placeholder="Password" />
+				<input
+					type="password"
+					id="password"
+					name="passwordHash"
+					placeholder="Password"
+				/>
 			</p>
 			<p>
-				<select name="role" id="role">
-					<option
-						th:each="roleConst : ${T(com.example.eshop.entities.UserEntity.Role).values()}"
-						th:value="${roleConst.name()}"
-						th:utext="${roleConst.name()}"
-					></option>
-				</select>
+				<input
+					type="password"
+					id="passwordRepeat"
+					name="passwordRepeat"
+					placeholder="Repeat password"
+				/>
+			</p>
+			<p id="error-message" style="color: red; display: none">
+				Паролі не співпадають!
 			</p>
 			<button class="submit-btn primary" type="submit">Sign up</button>
 		</form>
+
+		<script type="text/javascript" src="js/register/register.js"></script>
+
+		<script>
+			function validatePasswords() {
+				const pw1 = document.getElementById('password').value
+				const pw2 = document.getElementById('passwordRepeat').value
+				const error = document.getElementById('error-message')
+
+				if (pw1 !== pw2) {
+					error.style.display = 'block'
+					return false
+				} else {
+					error.style.display = 'none'
+					return true
+				}
+			}
+		</script>
 	</body>
 </html>

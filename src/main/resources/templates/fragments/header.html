@@ -1,7 +1,13 @@
 <nav class="header" th:fragment="header-fragment">
-	<div class="header-element"><a href="/products">Products</a></div>
-	<div class="header-element"><a href="/users">Users</a></div>
-	<div class="header-element"><a href="/categories">Categories</a></div>
+	<div class="header-element" sec:authorize="hasAnyAuthority('ADMIN', 'USER')">
+		<div class="header-element"><a href="/products">Products</a></div>
+	</div>
+	<div class="header-element" sec:authorize="hasAuthority('ADMIN')">
+		<a href="/users">Users</a>
+	</div>
+	<div class="header-element" sec:authorize="hasAnyAuthority('ADMIN', 'USER')">
+		<div class="header-element"><a href="/categories">Categories</a></div>
+	</div>
 	<div class="header-element"><a href="/error">Error</a></div>
 	<div class="header-element"><a href="/logout">Logout</a></div>
 	<div style="clear: both"></div>
